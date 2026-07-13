@@ -16,12 +16,12 @@ public class MacromodClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // Wir übergeben eine leere Kategorie-Instanz, um den Typ-Fehler zu vermeiden
+        // Erstellt das KeyMapping und holt die Kategorie über die korrekte Methode der Klasse
         macroKey = KeyBindingHelper.registerKeyBinding(new KeyMapping(
             "key.macromod.pvp", 
             InputConstants.Type.KEYSYM, 
             GLFW.GLFW_KEY_X, 
-            "key.categories.misc" 
+            KeyMapping.CATEGORY_ALL_KEYS // Nutzt die universelle Standard-Kategorie als Objekt
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
