@@ -16,12 +16,12 @@ public class MacromodClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // Registriert die Taste 'X' mit korrigierter Kategorie
+        // Nutzt den Fabric KeyBindingHelper, um das KeyMapping mit String-Kategorie sicher zu registrieren
         macroKey = KeyBindingHelper.registerKeyBinding(new KeyMapping(
             "key.macromod.pvp", 
             InputConstants.Type.KEYSYM, 
             GLFW.GLFW_KEY_X, 
-            "key.categories.misc" // Standard-Minecraft-Kategorie "Verschiedenes"
+            "key.categories.misc"
         ));
 
         // Prüft jeden Tick, ob die Taste gedrückt ist
