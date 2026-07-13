@@ -15,6 +15,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Gradle
+        working-directory: macromod-template-1.21.11
         run: |
           chmod +x gradlew
           ./gradlew build
@@ -23,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Fabric-Mod
-          path: build/libs/*.jar
+          path: macromod-template-1.21.11/build/libs/*.jar
