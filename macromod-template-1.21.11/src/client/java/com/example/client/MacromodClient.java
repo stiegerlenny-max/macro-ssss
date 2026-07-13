@@ -16,15 +16,15 @@ public class MacromodClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // Nutzt den Fabric KeyBindingHelper, um das KeyMapping mit String-Kategorie sicher zu registrieren
+        // Registriert die Taste 'X'
+        // Die Kategorie wird hier über die interne KeyMapping-Struktur korrekt zugewiesen
         macroKey = KeyBindingHelper.registerKeyBinding(new KeyMapping(
             "key.macromod.pvp", 
             InputConstants.Type.KEYSYM, 
             GLFW.GLFW_KEY_X, 
-            "key.categories.misc"
+            "key.categories.misc" 
         ));
 
-        // Prüft jeden Tick, ob die Taste gedrückt ist
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (macroKey.consumeClick() && client.player != null && client.gameMode != null) {
                 
@@ -33,10 +33,7 @@ public class MacromodClient implements ClientModInitializer {
                 if (hit != null && hit.getType() == HitResult.Type.BLOCK) {
                     BlockHitResult blockHit = (BlockHitResult) hit;
                     
-                    // Klick 1: Platziert Obsidian oder den Anchor
                     client.gameMode.useItemOn(client.player, InteractionHand.MAIN_HAND, blockHit);
-                    
-                    // Klick 2: Setzt den Crystal drauf oder lädt den Anchor
                     client.gameMode.useItemOn(client.player, InteractionHand.MAIN_HAND, blockHit);
                 }
             }
