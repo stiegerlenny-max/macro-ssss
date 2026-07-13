@@ -16,12 +16,13 @@ public class MacromodClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // Wir registrieren das KeyMapping hier nur mit den nötigsten Parametern
+        // Hier nutzen wir KeyMapping.Category.MISC anstatt eines Strings.
+        // Das ist die einzige Weise, wie es in 1.21.1 kompiliert.
         macroKey = KeyBindingHelper.registerKeyBinding(new KeyMapping(
             "key.macromod.pvp", 
             InputConstants.Type.KEYSYM, 
             GLFW.GLFW_KEY_X, 
-            "key.categories.misc"
+            KeyMapping.Category.MISC
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
