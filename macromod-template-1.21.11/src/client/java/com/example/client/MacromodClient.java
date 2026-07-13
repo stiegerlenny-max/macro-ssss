@@ -17,13 +17,16 @@ public class MacromodClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         // Registriert die Taste 'X'
-        // Die Kategorie wird hier über die interne KeyMapping-Struktur korrekt zugewiesen
+        // WICHTIG: Wir nutzen hier KeyMapping.CATEGORY_MISC, um den Typ-Fehler zu beheben
         macroKey = KeyBindingHelper.registerKeyBinding(new KeyMapping(
             "key.macromod.pvp", 
             InputConstants.Type.KEYSYM, 
             GLFW.GLFW_KEY_X, 
             "key.categories.misc" 
         ));
+
+        // Manuelle Zuweisung der Kategorie über die offizielle Methode, falls der Konstruktor zickt:
+        macroKey.setCategory(KeyMapping.CATEGORY_MISC);
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (macroKey.consumeClick() && client.player != null && client.gameMode != null) {
