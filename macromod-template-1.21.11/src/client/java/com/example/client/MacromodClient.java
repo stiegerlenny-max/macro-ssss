@@ -4,7 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.util.InputConstants;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -16,11 +16,11 @@ public class MacromodClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // Registriert die Taste 'X' für dein Makro mit offiziellen Mappings
+        // Registriert die Taste 'X'
         macroKey = KeyBindingHelper.registerKeyBinding(new KeyMapping(
             "key.macromod.pvp", 
             InputConstants.Type.KEYSYM, 
-            GLFW.GLFW_KEY_X, // Hier kannst du die Taste anpassen
+            GLFW.GLFW_KEY_X, 
             "category.macromod"
         ));
 
