@@ -16,17 +16,16 @@ public class MacromodClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // Wir erstellen das KeyMapping OHNE die Kategorie im Konstruktor, 
-        // um den Typ-Fehler zu vermeiden.
+        // Registrierung mit der korrekten Kategorie-Konstante für 1.21
         macroKey = KeyBindingHelper.registerKeyBinding(new KeyMapping(
             "key.macromod.pvp", 
             InputConstants.Type.KEYSYM, 
             GLFW.GLFW_KEY_X, 
-            "key.categories.misc"
+            "key.categories.misc" // Der String ist hier als Übersetzungsschlüssel erlaubt
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (macroKey.consumeClick() && client.player != null && client.gameMode != null) {
+            while (macroKey.consumeClick() && client.player != null && client.gameMode != null) {
                 HitResult hit = client.hitResult;
                 if (hit instanceof BlockHitResult blockHit) {
                     client.gameMode.useItemOn(client.player, InteractionHand.MAIN_HAND, blockHit);
